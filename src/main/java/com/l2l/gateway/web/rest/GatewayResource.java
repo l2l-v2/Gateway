@@ -51,4 +51,10 @@ public class GatewayResource {
         });
         return new ResponseEntity<>(routeVMs, HttpStatus.OK);
     }
+    @GetMapping("/hello")
+    public ResponseEntity<String> testHello(){
+        String str = "Hello Gateway!!";
+        System.out.println(str);
+        return new ResponseEntity<String>(str , HttpStatus.OK);
+    }
 }

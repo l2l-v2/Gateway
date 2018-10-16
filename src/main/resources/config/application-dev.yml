@@ -46,7 +46,7 @@ spring:
             auto-commit: false
     h2:
         console:
-            enabled: false
+            enabled: true
     jpa:
         database-platform: io.github.jhipster.domain.util.FixedH2Dialect
         database: H2
@@ -132,7 +132,8 @@ jhipster:
         authentication:
             jwt:
                 # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-                base64-secret: OWZjY2YxYWUxYTcyZjAwNzQzODM1NzJlZjVhMGJhNjU3MjIwYWNiMzFlZGFhN2Y5ZTYzMTQ0NTNkNTBmNzhjNmNhNmU3Y2M5OThlZjgxMDA1NDc1YTRjNzBkODU1MTVlMGM2ZjIzMDE5NTg4MDAwYWVjNTljNjc1MGVjNTY0YjU=
+#                base64-secret: OWZjY2YxYWUxYTcyZjAwNzQzODM1NzJlZjVhMGJhNjU3MjIwYWNiMzFlZGFhN2Y5ZTYzMTQ0NTNkNTBmNzhjNmNhNmU3Y2M5OThlZjgxMDA1NDc1YTRjNzBkODU1MTVlMGM2ZjIzMDE5NTg4MDAwYWVjNTljNjc1MGVjNTY0YjU=
+                base64-secret: T1daalkyWXhZV1V4WVRjeVpqQXdOelF6T0RNMU56SmxaalZoTUdKaE5qVTNNakl3WVdOaU16RmxaR0ZoTjJZNVpUWXpNVFEwTlROa05UQm1OemhqTm1OaE5tVTNZMk01T1RobFpqZ3hNREExTkRjMVlUUmpOekJrT0RVMU1UVmxNR00yWmpJek1ERTVOVGc0TURBd1lXVmpOVGxqTmpjMU1HVmpOVFkwWWpVPQo=
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
