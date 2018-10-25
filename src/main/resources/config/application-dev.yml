@@ -152,6 +152,15 @@ jhipster:
             host: localhost
             port: 5000
             queue-size: 512
+#++++++++++++++++++++++++++++++++
+# add routes map oriented service
+#+++++++++++++++++++++++++++++++
+zuul:
+  routes:
+    vessel:
+        path: /api-vessel-rb/**
+        service-id: vessel
+  ignored-services: ['vessel'] # disable default configuration of routing rule per service.
 
 # ===================================================================
 # Application specific properties
