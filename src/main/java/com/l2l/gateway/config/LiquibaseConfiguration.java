@@ -2,6 +2,7 @@ package com.l2l.gateway.config;
 
 import javax.sql.DataSource;
 
+import liquibase.integration.spring.SpringLiquibase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,7 +15,8 @@ import org.springframework.core.task.TaskExecutor;
 
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.liquibase.AsyncSpringLiquibase;
-import liquibase.integration.spring.SpringLiquibase;
+
+import java.util.concurrent.Executor;
 
 @Configuration
 public class LiquibaseConfiguration {
@@ -32,7 +34,7 @@ public class LiquibaseConfiguration {
 
     @Bean
     public SpringLiquibase liquibase(@Qualifier("taskExecutor") TaskExecutor taskExecutor,
-            DataSource dataSource, LiquibaseProperties liquibaseProperties) {
+                                     DataSource dataSource, LiquibaseProperties liquibaseProperties) {
 
         // Use liquibase.integration.spring.SpringLiquibase if you don't want Liquibase to start asynchronously
         SpringLiquibase liquibase = new AsyncSpringLiquibase(taskExecutor, env);
