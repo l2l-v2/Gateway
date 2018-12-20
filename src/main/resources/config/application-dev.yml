@@ -61,6 +61,8 @@ spring:
             hibernate.cache.hazelcast.instance_name: Gateway
             hibernate.cache.use_minimal_puts: true
             hibernate.cache.hazelcast.use_lite_member: true
+        hibernate:
+          ddl-auto: update # bqzhu +
     liquibase:
         contexts: dev
     mail:
@@ -127,7 +129,7 @@ jhipster:
         allowed-headers: "*"
         exposed-headers: "Authorization,Link,X-Total-Count"
         allow-credentials: true
-        max-age: 1800
+        max-age: 5000
     security:
         authentication:
             jwt:
@@ -160,7 +162,29 @@ zuul:
     vessel:
         path: /api-vessel-rb/**
         service-id: vessel
-  ignored-services: ['vessel'] # disable default configuration of routing rule per service.
+    vesselmanagercoordinator:
+        path: /vmc/**
+        service-id:  vesselmanagercoordinator
+        url: http://127.0.0.1:8085
+        customSensitiveHeaders: true
+  ws:
+    brokerages:
+        vesselmanagercoordinator:
+            end-points: /ssp
+            brokers:  /topic
+            destination-prefixes: /app
+  ignored-services: ['vessel','vesselmanagercoordinator'] # disable default configuration of routing rule per service.
+
+#hystrix:
+#    command:
+#        default:
+#            execution:
+#                isolation:
+#                    thread:
+#                        timeoutInMilliseconds: 60000  #设置API网关中路由转发请求的HystrixCommand执行超时时间
+#ribbon:
+#    connectTimeout: 3000 #设置路由转发请求的时候，创建请求连接的超时时间
+#        readTimeout: 60000  #用来设置路由转发请求的超时时间
 
 # ===================================================================
 # Application specific properties

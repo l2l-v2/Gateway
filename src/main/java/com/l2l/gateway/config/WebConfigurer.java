@@ -1,5 +1,7 @@
 package com.l2l.gateway.config;
 
+import com.github.mthizo247.cloud.netflix.zuul.web.socket.ZuulPropertiesResolver;
+import com.github.mthizo247.cloud.netflix.zuul.web.socket.ZuulWebSocketProperties;
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.JHipsterProperties;
 import io.github.jhipster.config.h2.H2ConfigurationHelper;
@@ -17,6 +19,7 @@ import org.springframework.boot.web.embedded.undertow.UndertowServletWebServerFa
 import org.springframework.boot.web.server.*;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
+import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -186,13 +189,32 @@ public class WebConfigurer implements ServletContextInitializer, WebServerFactor
         if (config.getAllowedOrigins() != null && !config.getAllowedOrigins().isEmpty()) {
             log.debug("Registering CORS filter");
             source.registerCorsConfiguration("/api/**", config);
-            source.registerCorsConfiguration("/management/**", config);
+//            source.registerCorsConfiguration("/vesselmanagercoordinator/ssp/**", config);
+            source.registerCorsConfiguration("/vmc/management/**", config);
             source.registerCorsConfiguration("/v2/api-docs", config);
-            source.registerCorsConfiguration("/*/api/**", config);
-            source.registerCorsConfiguration("/*/management/**", config);
         }
         return new CorsFilter(source);
     }
+
+    /**
+     * 重写获取服务url的方法：原有方法读取配置的路由url，改为通过服务读取
+     * @param zuulProperties
+     * @return
+     */
+//    @Bean
+//    public ZuulPropertiesResolver zuulPropertiesResolver(
+//        final ZuulProperties zuulProperties) {
+//        return new ZuulPropertiesResolver() {
+//            @Override
+//            public String getRouteHost(ZuulWebSocketProperties.WsBrokerage wsBrokerage) {
+//            // 默认方法去读配置文件url属性
+//            return zuulProperties.getRoutes().get(wsBrokerage.getId()).getUrl();
+//            //自己改写，可以通过注册中心读取服务地址、或者数据库等方式
+////                return "http://xxx";
+//            }
+//
+//        };
+//    }
 
     /**
      * Initializes H2 console.

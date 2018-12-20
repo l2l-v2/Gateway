@@ -112,8 +112,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/websocket/**").permitAll()
             .antMatchers("/management/health").permitAll()
             .antMatchers("/management/info").permitAll()
-            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
-        .and()
+            .antMatchers("/vmc/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/ssp").hasAuthority(AuthoritiesConstants.ADMIN)
+//            .antMatchers("/vmc/ssp/**").permitAll()
+
+            .and()
             .apply(securityConfigurerAdapter());
 
     }

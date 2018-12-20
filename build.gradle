@@ -258,6 +258,9 @@ dependencies {
     testCompile "com.mattbertolini:liquibase-slf4j"
     testCompile "org.hamcrest:hamcrest-library"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
+
+    compile "com.github.mthizo247:spring-cloud-netflix-zuul-websocket:1.0.0-RELEASE"
+
 }
 
 task cleanResources(type: Delete) {

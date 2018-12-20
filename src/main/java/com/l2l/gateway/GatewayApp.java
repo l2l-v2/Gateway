@@ -1,5 +1,6 @@
 package com.l2l.gateway;
 
+import com.github.mthizo247.cloud.netflix.zuul.web.socket.EnableZuulWebSocket;
 import com.l2l.gateway.config.ApplicationProperties;
 import com.l2l.gateway.config.DefaultProfileUtil;
 
@@ -14,6 +15,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.core.env.Environment;
+import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 
 import javax.annotation.PostConstruct;
 import java.net.InetAddress;
@@ -24,6 +26,8 @@ import java.util.Collection;
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
 @EnableDiscoveryClient
 @EnableZuulProxy
+@EnableZuulWebSocket
+@EnableWebSocketMessageBroker
 public class GatewayApp {
 
     private static final Logger log = LoggerFactory.getLogger(GatewayApp.class);
@@ -91,4 +95,5 @@ public class GatewayApp {
                 "Config Server: \t{}\n----------------------------------------------------------",
             configServerStatus == null ? "Not found or not setup for this application" : configServerStatus);
     }
+
 }
